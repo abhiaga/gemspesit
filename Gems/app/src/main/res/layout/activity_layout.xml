@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.guha.layout.layout">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="                          USN                                     Name"
+            android:id="@+id/textView"
+            android:layout_weight="0.03" />
+        <TextView android:layout_span="2" android:layout_height="1px"
+            android:layout_width="fill_parent" android:text="">
+        </TextView>
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS001                       A .arun Adamns"
+            android:id="@+id/checkBox"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS002                       Anna Paul"
+            android:id="@+id/checkBox13"
+            android:layout_weight="0.03" />
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS003                       Reete Dixit"
+            android:id="@+id/checkBox2"
+            android:layout_weight="0.03" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS004                       \Aman Achpal"
+            android:id="@+id/checkBox3"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS005                       Abhishek A"
+            android:id="@+id/checkBox4"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS006                       Aarti S"
+            android:id="@+id/checkBox5"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS007                       A Nireeksha"
+            android:id="@+id/checkBox6"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS007                       Akshay Ranjit"
+            android:id="@+id/checkBox7"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS008                       Akshay Somyaji"
+            android:id="@+id/checkBox8"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS0010                     Anay V"
+            android:id="@+id/checkBox9"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS0011                     Arvind CM"
+            android:id="@+id/checkBox10"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS0012                     Girish K"
+            android:id="@+id/checkBox11"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS0013                     Ganeesh R"
+            android:id="@+id/checkBox12"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PI13CS0014                     Ganguly P"
+            android:id="@+id/checkBox14"
+            android:layout_weight="0.03"
+            android:checked="false" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next Page"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.03" />
+
+    </LinearLayout>
+</RelativeLayout>
