@@ -1,42 +1,44 @@
 package com.example.guha.gems;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class layout extends AppCompatActivity {
-    Button b1;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class layout extends Activity {
+    //String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry","WebOS","Ubuntu","Windows7","Max OS X"};
+   // ArrayList<String> mobileArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_layout);
-        b1 = (Button) findViewById(R.id.button);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*if (ed1.getText().toString().equals("admin") &&
 
-                        ed2.getText().toString().equals("admin")) {
-                    Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
+        ListView lv;
 
-                } else {
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+        setContentView(R.layout.activity_layout_1a);
+        lv = (ListView) findViewById(R.id.listView)
+;
 
-                    //tx1.setVisibility(View.VISIBLE);
-                    //tx1.setBackgroundColor(Color.RED);
-                    counter--;
-                    tx1.setText(Integer.toString(counter));
+        // Instanciating an array list (you don't need to do this,
+        // you already have yours).
+        List<String> your_array_list = new ArrayList<String>();
+        your_array_list.add("Abhishek");
+        your_array_list.add("Prithvi");
+        your_array_list.add("Sayan");
 
-                    if (counter == 0) {
-                        b1.setEnabled(false);
-                    }
-                }
-                */
-                Intent a=new Intent(layout.this,layout2.class);
-                startActivity(a);
-            }
-        });
+        // This is the array adapter, it takes the context of the activity as a
+        // first parameter, the type of list view as a second parameter and your
+        // array as a third parameter.
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                your_array_list );
+
+        lv.setAdapter(arrayAdapter);
     }
 }
+
+

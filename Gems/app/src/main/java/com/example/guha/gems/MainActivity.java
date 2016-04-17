@@ -2,6 +2,7 @@ package com.example.guha.gems;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import io.cloudboost.CloudException;
+import io.cloudboost.CloudUser;
+import io.cloudboost.CloudUserCallback;
 
 public class MainActivity extends AppCompatActivity {
     Button b1,b2;
@@ -21,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
 
+       // CloudApp.init(myAppId, myKey);
         b1 = (Button) findViewById(R.id.blogin);
         ed1 = (EditText) findViewById(R.id.editText);
         ed2 = (EditText) findViewById(R.id.editText2);
@@ -34,15 +41,47 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ed1.getText().toString().equals("admin") &&
 
-                        ed2.getText().toString().equals("admin")) {
+                // String userN=obj.getString("username");
+                // String pass=obj.getString("password");
+                //System.out.println(userN+" "+pass+" "+name);
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+
+
+                CloudUser user = new CloudUser();
+                try {
+                    user.set("username", ed1.getText().toString());
+                } catch (CloudException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    user.set("password", ed2.getText().toString());
+                } catch (CloudException e) {
+                    e.printStackTrace();
+                }
+                CloudUserCallback callbackObj = new CloudUserCallback() {
+                    @Override
+                    public void done(CloudUser obj, CloudException e) {
+                        System.out.println("hi");
+//
+                    }
+                };
+
+                try {
+                    user.logIn(callbackObj);
+                } catch (CloudException e) {
+                    e.printStackTrace();
+                }
+
+             //  System.out.println(CloudUser.getcurrentUser().getEmail());
+
+                if (CloudUser.getcurrentUser()!=null) {
                     Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
 
-                    Intent a=new Intent(MainActivity.this,Menu1.class);
+                    Intent a = new Intent(MainActivity.this, Menu1.class);
                     startActivity(a);
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
 
                     //tx1.setVisibility(View.VISIBLE);
@@ -54,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                         b1.setEnabled(false);
                     }
                 }
-
             }
         });
     }

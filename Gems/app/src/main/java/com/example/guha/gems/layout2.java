@@ -1,46 +1,120 @@
 package com.example.guha.gems;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ListView;
 
-public class layout2 extends AppCompatActivity {
-    Button b1;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_layout2);
-        b1 = (Button) findViewById(R.id.button);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*if (ed1.getText().toString().equals("admin") &&
+import java.util.ArrayList;
 
-                        ed2.getText().toString().equals("admin")) {
-                    Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
+import io.cloudboost.CloudException;
+import io.cloudboost.CloudObject;
+import io.cloudboost.CloudObjectArrayCallback;
+import io.cloudboost.CloudObjectCallback;
+import io.cloudboost.CloudQuery;
 
-                } else {
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+public class layout2 extends Activity {
 
-                    //tx1.setVisibility(View.VISIBLE);
-                    //tx1.setBackgroundColor(Color.RED);
-                    counter--;
-                    tx1.setText(Integer.toString(counter));
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            final ArrayList<String> list = new ArrayList<String>(100);
+            setContentView(R.layout.activity_layout_1a);
 
-                    if (counter == 0) {
-                        b1.setEnabled(false);
+
+            CloudQuery query = new CloudQuery("Students");
+            try {
+                query.setLimit(100);
+                query.orderByAsc("USN");
+                query.find(new CloudObjectArrayCallback() {
+                    @Override
+                    public void done(CloudObject[] obj, CloudException e) {
+                        for (CloudObject c:obj){
+                            list.add(c.get("USN").toString());
                     }
                 }
-                */
-              //  Intent a=new Intent(MainActivity.this,Menu1.class);
-                //startActivity(a);
-                //AlertDialog.Builder but = new AlertDialog.Builder(this);
-                Toast.makeText(getApplicationContext(), "Successfully submitted", Toast.LENGTH_SHORT).show();
-
+            });
+            } catch (CloudException e) {
+                e.printStackTrace();
             }
-        });
-    }
+
+
+            //list.add("");
+
+            //instantiate custom adapter
+            MyCustomAdapter adapter = new MyCustomAdapter(list, this);
+
+            //handle listview and assign adapter
+            ListView lView = (ListView)findViewById(R.id.listView);
+            lView.setAdapter(adapter);
+            final Button Submit = (Button)findViewById(R.id.submit);
+            System.out.println(Submit);
+            Submit.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                    for (String u : list) {
+                        CloudObject obj = new CloudObject("Attendance");
+                        try {
+                            //System.out.println("hellllllooooooo1");
+                            obj.set("USN", u); //store string
+                        } catch (CloudException e) {
+                            // System.out.println("hellllllooooooo2");
+                            e.printStackTrace();
+                        }
+                        try {
+                            //System.out.println("hellllllooooooo3");
+                            obj.set("time", Menu1.time); // store number
+                        } catch (CloudException e) {
+                            //System.out.println("hellllllooooooo4");
+                            e.printStackTrace();
+                        }
+                        try {
+                            //System.out.println("hellllllooooooo5");
+                            obj.set("Attendance", false);
+                            // store number
+                        } catch (CloudException e) {
+                            // System.out.println("hellllllooooooo6");
+                            e.printStackTrace();
+                        }
+                        try {
+                            obj.save(new CloudObjectCallback() {
+                                @Override
+                                public void done(CloudObject x, CloudException t) {
+                                    if (x != null) {
+                                        System.out.println("hellllllooooooo11");
+                                    }
+                                    if (t != null) {
+                                        System.out.println(t.toString());
+                                    }
+                                }
+                            });
+                        } catch (CloudException e) {
+                            //System.out.println("hellllllooooooo9");
+                            e.printStackTrace();
+                        }
+                        Intent a = new Intent(layout2.this, Menu1.class);
+                        startActivity(a);
+
+                    }
+
+                }
+
+            });
+
+        }
+
+
+
 
 }
+
+

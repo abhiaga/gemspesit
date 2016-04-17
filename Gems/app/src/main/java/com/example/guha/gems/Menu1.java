@@ -17,6 +17,8 @@ import java.util.Random;
 public class Menu1 extends AppCompatActivity {
 
     TableLayout table_layout;
+    public static String section;
+    public static String time;
 
     Button b,b2,b3,b4,b5,b6;
     @Override
@@ -132,7 +134,7 @@ public class Menu1 extends AppCompatActivity {
 // inner for loop
             for (int j = 1; j <= cols; j++) {
 
-                TextView tv = new TextView(this);
+                final TextView tv = new TextView(this);
                 tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT));
                 LinearLayout.LayoutParams tvlp = (LinearLayout.LayoutParams) tv.getLayoutParams();
@@ -183,7 +185,9 @@ public class Menu1 extends AppCompatActivity {
                // tv.setOnClickListener(new listener()));
                 tv.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent a=new Intent(Menu1.this,layout.class);
+                        time=tv.getText().toString();
+                        System.out.println("helooooooooooo "+time);
+                        Intent a=new Intent(Menu1.this,layout2.class);
                         startActivity(a);
                     }
                 });
@@ -223,6 +227,7 @@ public class Menu1 extends AppCompatActivity {
     };*/
 
             table_layout.addView(row);
+
 
         }
     }
