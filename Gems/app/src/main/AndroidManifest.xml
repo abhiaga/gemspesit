@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.guha.gems">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -45,7 +46,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Marks" />
-        <activity android:name=".UpdateTT"></activity>
+        <activity android:name=".UpdateTT" />
+        <activity
+            android:name=".Exam"
+            android:label="@string/title_activity_exam"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

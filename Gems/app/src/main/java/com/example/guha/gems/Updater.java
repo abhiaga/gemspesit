@@ -21,30 +21,29 @@ import java.io.File;
             this.inputFile = inputFile;
         }
 
-        public String[][] read() throws IOException
-        {
+        public String[][] read() throws IOException {
             File inputWorkbook = new File(inputFile);
+            System.out.println(inputWorkbook.toString());
             Workbook w;
 
-            try
-            {
-                w = Workbook.getWorkbook(inputWorkbook);
-                // Get the first sheet
+            if (inputWorkbook.exists()) {
+
+                try {
+                    w = Workbook.getWorkbook(inputWorkbook);
+                    // Get the first sheet
 
 
-                Sheet sheet = w.getSheet(0);
-                data = new String[sheet.getColumns()][sheet.getRows()];
-                // Loop over first 10 column and lines
-                //     System.out.println(sheet.getColumns() +  " " +sheet.getRows());
-                for (int j = 0; j <sheet.getColumns(); j++)
-                {
-                    for (int i = 0; i < sheet.getRows(); i++)
-                    {
-                        Cell cell = sheet.getCell(j, i);
-                        data[j][i] = cell.getContents();
-                        //  System.out.println(cell.getContents());
+                    Sheet sheet = w.getSheet(0);
+                    data = new String[sheet.getColumns()][sheet.getRows()];
+                    // Loop over first 10 column and lines
+                    //     System.out.println(sheet.getColumns() +  " " +sheet.getRows());
+                    for (int j = 0; j < sheet.getColumns(); j++) {
+                        for (int i = 0; i < sheet.getRows(); i++) {
+                            Cell cell = sheet.getCell(j, i);
+                            data[j][i] = cell.getContents();
+                            //  System.out.println(cell.getContents());
+                        }
                     }
-                }
 
          /*   for (int j = 0; j < data.length; j++)
             {
@@ -55,13 +54,14 @@ import java.io.File;
                 }
             } */
 
+                } catch (BiffException e) {
+                    e.printStackTrace();
+                }
             }
-            catch (BiffException e)
-            {
-                e.printStackTrace();
+            else System.out.println("not existence");
+                return data;
             }
-            return data;
-        }
+
 
 
     }

@@ -31,7 +31,7 @@ public class layout extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent a = new Intent(layout.this, Marks.class);
+                Intent a = new Intent(layout.this, UpdateTT.class);
                 startActivity(a);
 
             }
@@ -41,7 +41,7 @@ public class layout extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent a = new Intent(layout.this, UpdateTT.class);
+                Intent a = new Intent(layout.this,Marks.class );
                 startActivity(a);
 
             }
