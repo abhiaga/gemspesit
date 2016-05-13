@@ -46,67 +46,68 @@ public static String path=null;
                     startActivity(a);
 
                 }
+                else {
 
 
+                    Updater update = new Updater();
+                    if (path != null) {
+                        update.setInputFile(path);
+                        System.out.println("wassup");
+                        try {
+                            update.read();
+                            for (int j = 0; j < update.data.length; j++) {
+                                for (int k = 0; k < update.data[j].length; k++) {
+                                    System.out.print(update.data[j][k] + "    ");
 
-                Updater update=new Updater();
-                if(path!=null) {
-                    update.setInputFile(path);
-                    System.out.println("wassup");
-                    try {
-                        update.read();
-                        for(int j=0;j<update.data.length;j++){
-                            for(int k=0;k<update.data[j].length;k++){
-                                System.out.print(update.data[j][k]+"    ");
-
+                                }
+                                System.out.println();
                             }
-                            System.out.println();
-                        }
-                        CloudObject obj = new CloudObject("Marks");
-                        System.out.println(update.data.length+"                  "+update.data[0].length);
-                        for(int i = 1; i < update.data[0].length; ++i) {
+                            CloudObject obj = new CloudObject("Marks");
+                            System.out.println(update.data.length + "                  " + update.data[0].length);
+                            for (int i = 1; i < update.data[0].length; ++i) {
 
-                            try {
-                                //System.out.println("hellllllooooooo1");
-                                obj.set("SubjectCode",subjectCode);
-                                obj.set("TestNo", testno);
-                                obj.set("USN", update.data[0][i]); //store string
-                                obj.set("Score",Integer.parseInt(update.data[1][i]));
-                            } catch (CloudException e) {
-                                System.out.println("hellllllooooooo2");
-                                e.printStackTrace();
-                            }
+                                try {
+                                    //System.out.println("hellllllooooooo1");
+                                    obj.set("SubjectCode", subjectCode);
+                                    obj.set("TestNo", testno);
+                                    obj.set("USN", update.data[0][i]); //store string
+                                    obj.set("Score", Integer.parseInt(update.data[1][i]));
+                                } catch (CloudException e) {
+                                    System.out.println("hellllllooooooo2");
+                                    e.printStackTrace();
+                                }
 
 
-                            try {
-                                obj.save(new CloudObjectCallback() {
-                                    @Override
-                                    public void done(CloudObject x, CloudException t) {
-                                        if (x != null) {
-                                            System.out.println("hellllllooooooo7");
+                                try {
+                                    obj.save(new CloudObjectCallback() {
+                                        @Override
+                                        public void done(CloudObject x, CloudException t) {
+                                            if (x != null) {
+                                                System.out.println("hellllllooooooo7");
+                                            }
+                                            if (t != null) {
+                                                System.out.println(t.toString());
+                                            }
                                         }
-                                        if (t != null) {
-                                            System.out.println(t.toString());
-                                        }
-                                    }
-                                });
-                            } catch (CloudException e) {
-                                System.out.println("hellllllooooooo9");
-                                e.printStackTrace();
+                                    });
+                                } catch (CloudException e) {
+                                    System.out.println("hellllllooooooo9");
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                        Toast.makeText(getBaseContext(), "Done!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "Done!", Toast.LENGTH_SHORT).show();
+                            testno = 0;
+                            subjectCode = null;
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(getBaseContext(), path,Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getBaseContext(), "Choose a file please", Toast.LENGTH_SHORT).show();
                     }
-                    // Toast.makeText(getBaseContext(), path,Toast.LENGTH_SHORT).show();
                 }
-
-                else{
-                    Toast.makeText(getBaseContext(), "Choose a file please",Toast.LENGTH_SHORT).show();
-                }
-
 
             }
         });
