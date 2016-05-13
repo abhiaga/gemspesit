@@ -17,19 +17,38 @@ import io.cloudboost.CloudObjectCallback;
 import io.cloudboost.CloudQuery;
 
 public class layout2 extends Activity {
+public static String subcode=null;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
+            CloudQuery query=new CloudQuery("Subject");
+            try {
+                query.setLimit(1);
+                query=query.equalTo("Section",Menu1.section);
+                query=query.equalTo("Teacher",MainActivity.TName);
+                query.find(new CloudObjectArrayCallback() {
+                    @Override
+                    public void done(CloudObject[] obj, CloudException e) {
+                        for(CloudObject c:obj) {
+                            subcode = c.getString("SubjectCode");
+                        }
+                    }
+                });
+            } catch (CloudException e) {
+                e.printStackTrace();
+            }
+
             final ArrayList<String> list = new ArrayList<String>(100);
             setContentView(R.layout.activity_layout_1a);
 
 
-            CloudQuery query = new CloudQuery("Students");
+             query = new CloudQuery("Students");
             try {
                 query.setLimit(100);
+                query.equalTo("Section", Menu1.section);
                 query.orderByAsc("USN");
                 query.find(new CloudObjectArrayCallback() {
                     @Override
@@ -64,7 +83,8 @@ public class layout2 extends Activity {
                     for (String u : list) {
                         CloudObject obj = new CloudObject("Attendance");
                         try {
-                            //System.out.println("hellllllooooooo1");
+                            obj.set("SubjectCode",subcode);
+                            obj.set("Date",Menu1.date);
                             obj.set("USN", u); //store string
                         } catch (CloudException e) {
                             // System.out.println("hellllllooooooo2");

@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
-        android:hint="Enter Faculty ID"
+        android:hint="Enter USN"
         android:focusable="true"
         android:textColorHighlight="#151615"
         android:textColorHint="#706b70"

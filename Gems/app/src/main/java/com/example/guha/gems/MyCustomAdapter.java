@@ -79,6 +79,8 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
                     CloudObject obj = new CloudObject("Attendance");
                 try {
                     System.out.println("hellllllooooooo1");
+                    obj.set("SubjectCode", layout2.subcode);
+                    obj.set("Date",Menu1.date);
                     obj.set("USN", usn); //store string
                 } catch (CloudException e) {
                     System.out.println("hellllllooooooo2");

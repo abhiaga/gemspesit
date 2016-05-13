@@ -1,43 +1,54 @@
 package com.example.guha.gems;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.view.View;
+import android.widget.Button;
 
 
 public class layout extends Activity {
-    //String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry","WebOS","Ubuntu","Windows7","Max OS X"};
-   // ArrayList<String> mobileArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_layout);
+        Button b = (Button) findViewById(R.id.button);
+        Button b2 = (Button) findViewById(R.id.button2);
+        Button b3 = (Button) findViewById(R.id.button3);
+        b.setOnClickListener(new View.OnClickListener() {
 
-        ListView lv;
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent a = new Intent(layout.this, Menu1.class);
+                startActivity(a);
 
-        setContentView(R.layout.activity_layout_1a);
-        lv = (ListView) findViewById(R.id.listView)
-;
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
 
-        // Instanciating an array list (you don't need to do this,
-        // you already have yours).
-        List<String> your_array_list = new ArrayList<String>();
-        your_array_list.add("Abhishek");
-        your_array_list.add("Prithvi");
-        your_array_list.add("Sayan");
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent a = new Intent(layout.this, Marks.class);
+                startActivity(a);
 
-        // This is the array adapter, it takes the context of the activity as a
-        // first parameter, the type of list view as a second parameter and your
-        // array as a third parameter.
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                your_array_list );
+            }
+        });
+        b3.setOnClickListener(new View.OnClickListener() {
 
-        lv.setAdapter(arrayAdapter);
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent a = new Intent(layout.this, UpdateTT.class);
+                startActivity(a);
+
+            }
+        });
+
+
+
     }
 }
 

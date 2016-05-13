@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GemsStudent</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_menu1">Menu1</string>
+    <string name="title_activity_main1">Main1</string>
+    <string name="title_activity_attendance">Gems</string>
+    <string name="title_activity_marks">Gems</string>
 </resources>

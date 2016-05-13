@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.cloudboost.CloudApp;
 import io.cloudboost.CloudException;
 import io.cloudboost.CloudUser;
 import io.cloudboost.CloudUserCallback;
@@ -19,7 +20,7 @@ import io.cloudboost.CloudUserCallback;
 public class MainActivity extends AppCompatActivity {
     Button b1,b2;
     EditText ed1,ed2;
-
+    public static String TName;
     TextView tx1;
     int counter = 3;
 
@@ -28,8 +29,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
        // Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
+        final String myAppId="ulhgjcpqjxsh";
+        final String myKey="d5b7ca53-0da1-4207-8856-861a31a8b481";
 
-       // CloudApp.init(myAppId, myKey);
+
+        CloudApp.init(myAppId, myKey);
         b1 = (Button) findViewById(R.id.blogin);
         ed1 = (EditText) findViewById(R.id.editText);
         ed2 = (EditText) findViewById(R.id.editText2);
@@ -69,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 };
 
                 try {
+
+
                     user.logIn(callbackObj);
                 } catch (CloudException e) {
                     e.printStackTrace();
@@ -76,10 +82,12 @@ public class MainActivity extends AppCompatActivity {
 
              //  System.out.println(CloudUser.getcurrentUser().getEmail());
 
-                if (CloudUser.getcurrentUser()!=null) {
+                if (CloudUser.getcurrentUser() != null&&CloudUser.getcurrentUser().get("Role").toString().equals("Teacher")) {
+
+                   TName=CloudUser.getcurrentUser().getUserName();
                     Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
 
-                    Intent a = new Intent(MainActivity.this, Menu1.class);
+                    Intent a = new Intent(MainActivity.this, layout.class);
                     startActivity(a);
                 } else {
                     Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
